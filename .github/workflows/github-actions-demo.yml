@@ -10,5 +10,6 @@ jobs:
         with:
           python-version: '3.12' 
       - run: uname -a
+      - run: pip install -U pytest
       - run: pytest
 
