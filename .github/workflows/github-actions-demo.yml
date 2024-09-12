@@ -12,4 +12,3 @@ jobs:
       - run: uname -a
       - run: pip install -U pytest
       - run: pytest
-
