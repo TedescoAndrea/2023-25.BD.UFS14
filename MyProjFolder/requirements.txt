@@ -4,6 +4,3 @@
 
 azure-functions
 
-requests
-pandas
-openpyxl
