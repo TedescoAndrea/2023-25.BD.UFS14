@@ -61,5 +61,19 @@ def miao():
         remove_first_row_if_needed(file_path)
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
-    miao()
-    return func.HttpResponse("Scraping e aggiornamento del file completati.", status_code=200)
+    file_path = "/tmp/cir_reports.xlsx"
+    print("Recupero i dati da CIR...")
+    new_records = fetch_and_extract()  # Chiama la tua funzione di scraping
+
+    if new_records:
+        update_excel_file(new_records, file_path)
+        remove_duplicates_excel(file_path)
+        remove_first_row_if_needed(file_path)
+
+        # Apri il file temporaneo e invialo nella risposta
+        with open(file_path, "rb") as f:
+            data = f.read()
+        return func.HttpResponse(data, mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                                 headers={'Content-Disposition': 'attachment; filename="cir_reports.xlsx"'})
+    else:
+        return func.HttpResponse("Nessun nuovo dato da aggiornare.", status_code=200)
