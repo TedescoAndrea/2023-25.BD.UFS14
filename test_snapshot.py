@@ -1,7 +1,7 @@
 def coso():
-    return f'''due righe
-            seconda riga'''
-            
+    return "due righe\nseconda riga"
+
 def test_function_output_with_snapshot(snapshot):
-    snapshot.snapshot_dir = 'snapshots'  # This line is optional.
-    snapshot.assert_match(('function input'), 'foo_output.txt')
+    snapshot.snapshot_dir = 'snapshots' 
+    output = coso()  
+    snapshot.assert_match(output, 'foo_output.txt')
