@@ -5,11 +5,15 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-24.04
     steps:
-      - run: python --version
       - uses: actions/checkout@v4
+      - run: ls -la
+      - run: python --version
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12' 
       - run: uname -a
-      - run: pip install -U pytest-snapshot
-      - run: pytest
+      - run: lsb_release --all
+      - run: pip install -U pytest
+      - run: pip install -r requirements.txt
+      - run: pip install -r requirements.test.txt
+      - run: pytest 
