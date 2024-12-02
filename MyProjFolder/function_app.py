@@ -26,6 +26,6 @@ def MyHttpTrigger(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(f"Riconosciuto: {animal}.")
     else:
         return func.HttpResponse(
-            "Specifica un suono (miao o bau) nella query string o nel body della richiesta.",
+            "Specifica un suono (miao o bau). Miao miao miao",
             status_code=200
         )
