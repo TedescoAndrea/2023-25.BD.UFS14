@@ -2,6 +2,7 @@ import azure.functions as func
 import datetime
 import json
 import logging
+from .animal_detection import detect_animal_sound  # Importa la funzione
 
 app = func.FunctionApp()
 
@@ -10,18 +11,21 @@ def MyHttpTrigger(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
     name = req.params.get('name')
-    if not name:
+    sound = req.params.get('sound')
+
+    if not sound:
         try:
             req_body = req.get_json()
         except ValueError:
             pass
         else:
-            name = req_body.get('name')
+            sound = req_body.get('sound')
 
-    if name:
-        return func.HttpResponse(f"Hello, {name}. This HTTP triggered function executed successfully.")
+    if sound:
+        animal = detect_animal_sound(sound)
+        return func.HttpResponse(f"Riconosciuto: {animal}.")
     else:
         return func.HttpResponse(
-             "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
-             status_code=200
+            "Specifica un suono (miao o bau) nella query string o nel body della richiesta.",
+            status_code=200
         )
