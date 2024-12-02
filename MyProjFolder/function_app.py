@@ -2,7 +2,7 @@ import azure.functions as func
 import datetime
 import json
 import logging
-from .animal_detection import detect_animal_sound  # Importa la funzione
+from animal_detection import detect_animal_sound  # Importa la funzione
 
 app = func.FunctionApp()
 
