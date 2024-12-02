@@ -6,7 +6,7 @@ from .animal_detection import detect_animal_sound  # Importa la funzione
 
 app = func.FunctionApp()
 
-@app.route(route="MyHttpTrigger", auth_level=func.AuthLevel.ANONYMOUS)
+@app.route(route="MyHttpTrigger", auth_level=func.AuthLevel.anonymous)
 def MyHttpTrigger(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
